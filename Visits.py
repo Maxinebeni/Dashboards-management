@@ -168,7 +168,7 @@ def display_metric(col, title, value):
 display_metric(col1, "Total Visits", f"{total_visits:.0f}")
 display_metric(col2, "Total Day Visits", f"{day_visits:.0f}")
 display_metric(col3, "Total Night Visits", f"{night_visits:.0f}")
-display_metric(col4, "Average Visits", f"{average_visits:.2f}%")
+display_metric(col4, "Average Visits", f"{average_visits:.2f}")
 # Aggregate the data to count the number of preauthorizations by status
 
 
