@@ -130,6 +130,8 @@ if employers:
     filtered_df = filtered_df[filtered_df['Employer Name'].isin(employers)]
 if providers:
     filtered_df = filtered_df[filtered_df['Provider Name'].isin(providers)]
+    
+
 # Calculate metrics
 total_claimed_amount = filtered_df['Claim Amount'].sum()
 total_claims = len(filtered_df)
@@ -178,11 +180,19 @@ def display_metric(col, title, value):
         </div>
         """, unsafe_allow_html=True)
 col1, col2, col3, col4, col5 = st.columns(5)
-display_metric(col1,"Total Amount", f"{total_claimed_amount:,.0f}")
+
+
+# Display metrics
+scaling_factor = 1_000_000  # For millions
+scaled_total_claimed_amount = total_claimed_amount / scaling_factor
+scaled_approved_claim_amount = approved_claim_amount / scaling_factor
+scaled_average_amount = average_claim_amount / scaling_factor
+
+display_metric(col1,"Total Amount", f"RWF {scaled_total_claimed_amount:,.0f}M")
 display_metric(col5,"Total Claims", f"{total_claims:,}")
-display_metric(col2,"Approved Amount", f"{approved_claim_amount:,.0f}")
+display_metric(col2,"Approved Amount", f"RWF {scaled_approved_claim_amount:,.0f}M")
 display_metric(col4,"Approval Percentage", f"{approval_percentage:.2f}%")
-display_metric(col3,"Average Amount", f"{average_claim_amount:,.2f}")
+display_metric(col3,"Average Amount", f"RWF {scaled_average_amount:,.2f}M")
 # Function to create Seaborn plot
 def create_seaborn_plot(data, x, y, title, kind='bar', **kwargs):
     plt.figure(figsize=(10, 6))

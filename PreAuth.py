@@ -384,11 +384,15 @@ def display_metric(col, title, value):
         </div>
         """, unsafe_allow_html=True)
 # Display metrics
+scaling_factor = 1_000_000  # For millions
+scaled_total_preauth_amount = total_preauth_amount / scaling_factor
+scaled_approved_preauth_amount = approved_preauth_amount / scaling_factor
+
+# Display metrics
 display_metric(col1, "Total PreAuths", f"{total_preauth:.0f}")
-display_metric(col2, "Total PreAuth Amount", f"${total_preauth_amount:.2f}")
-display_metric(col3, "Approved PreAuth Amount", f"${approved_preauth_amount:.2f}")
+display_metric(col2, "Total PreAuth Amount", f"RWF {scaled_total_preauth_amount:.2f} M")
+display_metric(col3, "Approved PreAuth Amount", f"RWF {scaled_approved_preauth_amount:.2f} M")
 display_metric(col4, "Percentage of Approval", f"{percentage_approval:.2f}%")
-# Aggregate the data to count the number of preauthorizations by status
 
 specialization_count = df_filtered.groupby("Specialisation").size().reset_index(name='Number of PreAuth')
 
